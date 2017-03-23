@@ -21,7 +21,7 @@ module Util
       when node.children.count > 0
         separator + node.children.map {|c| call(c) }.join('')
       else
-        separator + node.text
+        separator + node.text.to_s
       end
     end
   end

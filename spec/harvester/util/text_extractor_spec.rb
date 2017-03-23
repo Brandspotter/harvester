@@ -33,4 +33,9 @@ describe Util::TextExtractor do
     node = Nokogiri::HTML.fragment('<div><script type="text/javascript">alert(1);</script>Hello, world</div>')
     subject.call(node).should_not include("alert")
   end
+
+  it 'does not crash on weird elements' do
+    node = Nokogiri::HTML.fragment('<?P>')
+    subject.call(node).should == ''
+  end
 end
