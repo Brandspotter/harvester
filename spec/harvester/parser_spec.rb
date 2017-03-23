@@ -7,13 +7,13 @@ describe Harvester::Parser do
 
   describe "#parse" do
     it "iterates over parser nodes and merges the results" do
-      subject.parser_nodes << stub(:parse => {:hello => "World"})
-      subject.parser_nodes << stub(:parse => {:moon  => "Light"})
+      subject.parser_nodes << double.tap { |d| d.stub(:parse).and_return(:hello => "World") }
+      subject.parser_nodes << double.tap { |d| d.stub(:parse).and_return(:moon  => "Light") }
       subject.parse("").should == {:hello => "World", :moon => "Light"}
     end
 
     it "converts strings to nokogiri docs" do
-      parser = stub
+      parser = double
       subject.parser_nodes << parser
       parser.should_receive(:parse).
           with(kind_of(Nokogiri::HTML::Document)).

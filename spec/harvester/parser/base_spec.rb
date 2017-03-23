@@ -21,7 +21,7 @@ describe Harvester::Parser::Base do
 
   describe "#parse" do
     it "invokes #_parse and returns hash with the result" do
-      subject.stub(:_parse).and_return { :hello }
+      subject.stub(:_parse) { :hello }
       subject.parse("").should == {:test => :hello}
     end
   end
